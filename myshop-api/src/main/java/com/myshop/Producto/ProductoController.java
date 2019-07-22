@@ -28,7 +28,7 @@ public class ProductoController {
     }
     
     @RequestMapping("/productos/{id}")
-    public Producto getProductos(@PathVariable int id){
+    public Producto getProducto(@PathVariable int id){
         return productoRepository.findById(id).get();
     }
     
