@@ -7,6 +7,7 @@ package com.myshop.Usuario;
 
 import com.myshop.Carrito.Carrito;
 import com.myshop.Carrito.CarritoRepository;
+import com.myshop.utils.Response;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,36 +23,54 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class UsuarioController {
-    
+
     @Autowired
     UsuarioRepository usuarioRepository;
     @Autowired
     public CarritoRepository carritoRepository;
-    
+
     @RequestMapping("/usuarios")
-    public List<Usuario> getUsuarios(){
+    public List<Usuario> getUsuarios() {
         List<Usuario> usuarios = new ArrayList<>();
         usuarioRepository.findAll().forEach(usuarios::add);
         return usuarios;
     }
-    
+
     @RequestMapping("/usuarios/{id}")
-    public Usuario getUsuario(@PathVariable String id){
+    public Usuario getUsuario(@PathVariable String id) {
         return usuarioRepository.findById(id).get();
     }
-    
-    @RequestMapping(method=RequestMethod.POST, value="/usuarios")
-    public String saveUser(@RequestBody Usuario usuario){
+
+    @RequestMapping(method = RequestMethod.POST, value = "/usuarios")
+    public Response saveUser(@RequestBody Usuario usuario) {
         usuarioRepository.save(usuario);
         Carrito carrito = new Carrito(usuario.getCorreo());
         carritoRepository.save(carrito);
-        return "Usuario creado!";
+        return new Response(200, "Usuario creado con éxito");
     }
-    
-    @RequestMapping(method=RequestMethod.PUT, value="/usuarios")
-    public String updateUser(@RequestBody Usuario usuario){
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/usuarios")
+    public String updateUser(@RequestBody Usuario usuario) {
         usuarioRepository.save(usuario);
-        
+
         return "Usuario modificado!";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/login")
+    public Response doLogin(@RequestBody Usuario usuario) {
+        Usuario u = null;
+        try{
+             u = usuarioRepository.findById(usuario.getCorreo()).get();
+        }catch(Exception e){
+            return new Response(404, "Usuario no encontrado");
+        }
+        if (u != null) {
+            if (usuario.getContrasena().equals(u.getContrasena())) {
+                return new Response(200, "Ok");
+            } else {
+                return new Response(401, "La contraseña es incorrecta");
+            }
+        } 
+        return new Response(404, "Usuario no encontrado");
     }
 }
