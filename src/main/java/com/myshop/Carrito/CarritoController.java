@@ -6,6 +6,7 @@
 package com.myshop.Carrito;
 
 import com.myshop.Producto.Producto;
+import com.myshop.Producto.ProductoRepository;
 import com.myshop.Usuario.Usuario;
 import com.myshop.Usuario.UsuarioRepository;
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public class CarritoController {
     public CarritoRepository carritoRepository;
     @Autowired
     public UsuarioRepository usuarioRepository;
+    @Autowired
+    public ProductoRepository productoRepository;
     
     @RequestMapping("/carrito")
     public List<Carrito> getCarritos(){
@@ -39,7 +42,10 @@ public class CarritoController {
     
     @RequestMapping("/carrito/{id}")
     public Carrito getCarrito(@PathVariable String id){
-        return carritoRepository.findById(id).get();
+        System.out.println("getCarrito");
+        Carrito c = carritoRepository.findById(id).get();
+        //return new CarritoResponse(c.getIdCarritoUsuario(), c.getProductoList(), c.getTotal());
+        return c;
     }
     
     @RequestMapping(method=RequestMethod.POST, value="/carrito")
@@ -49,11 +55,13 @@ public class CarritoController {
         return carritoRepository.save(carrito);
     }
     
-    @RequestMapping(method=RequestMethod.DELETE, value="/carrito/{id}")
-    public Carrito eliminarProductoCarrito(@RequestBody Producto producto, @PathVariable String id){
-        Carrito carrito = carritoRepository.findById(id).get();
+    @RequestMapping(method=RequestMethod.DELETE, value="/carrito/{idCarrito}/{productoId}")
+    public Carrito eliminarProductoCarrito(@PathVariable String idCarrito, @PathVariable int productoId){
+        Carrito carrito = carritoRepository.findById(idCarrito).get();
         List<Producto> productos = carrito.getProductoList();
-        productos.remove(producto);
+        Producto producto = productoRepository.findById(productoId).get();
+        boolean b = productos.remove(producto);
+        System.out.println("remove: " + b);
         carrito.setProductoList(productos);
         carrito.setTotal((float) (carrito.getTotal() - producto.getPrecio()));
         return carritoRepository.save(carrito);

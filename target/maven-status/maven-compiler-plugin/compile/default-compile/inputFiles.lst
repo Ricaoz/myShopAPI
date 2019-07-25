@@ -1,5 +1,12 @@
-/home/rlmoralesr/Escritorio/myShopAPI/myshop-api/src/main/java/com/myshop/Producto/ProductoController.java
-/home/rlmoralesr/Escritorio/myShopAPI/myshop-api/src/main/java/com/myshop/Producto/Producto.java
-/home/rlmoralesr/Escritorio/myShopAPI/myshop-api/src/main/java/com/myshop/MainApp.java
-/home/rlmoralesr/Escritorio/myShopAPI/myshop-api/src/main/java/com/myshop/HiController.java
-/home/rlmoralesr/Escritorio/myShopAPI/myshop-api/src/main/java/com/myshop/Producto/ProductoRepository.java
+/home/rlmoralesr/Escritorio/myShopAPI/src/main/java/com/myshop/Producto/Producto.java
+/home/rlmoralesr/Escritorio/myShopAPI/src/main/java/com/myshop/Carrito/Carrito.java
+/home/rlmoralesr/Escritorio/myShopAPI/src/main/java/com/myshop/Carrito/CarritoController.java
+/home/rlmoralesr/Escritorio/myShopAPI/src/main/java/com/myshop/Producto/ProductoController.java
+/home/rlmoralesr/Escritorio/myShopAPI/src/main/java/com/myshop/Usuario/UsuarioRepository.java
+/home/rlmoralesr/Escritorio/myShopAPI/src/main/java/com/myshop/utils/Response.java
+/home/rlmoralesr/Escritorio/myShopAPI/src/main/java/com/myshop/Usuario/UsuarioController.java
+/home/rlmoralesr/Escritorio/myShopAPI/src/main/java/com/myshop/Producto/ProductoRepository.java
+/home/rlmoralesr/Escritorio/myShopAPI/src/main/java/com/myshop/Usuario/Usuario.java
+/home/rlmoralesr/Escritorio/myShopAPI/src/main/java/com/myshop/Carrito/CarritoRepository.java
+/home/rlmoralesr/Escritorio/myShopAPI/src/main/java/com/myshop/MainApp.java
+/home/rlmoralesr/Escritorio/myShopAPI/src/main/java/com/myshop/HiController.java

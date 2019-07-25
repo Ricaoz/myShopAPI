@@ -36,12 +36,6 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")})
 public class Producto implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_producto")
-    private Integer idProducto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -54,6 +48,16 @@ public class Producto implements Serializable {
     @Size(max = 100)
     @Column(name = "descripcion")
     private String descripcion;
+    @Size(max = 300)
+    @Column(name = "imagen")
+    private String imagen;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_producto")
+    private Integer idProducto;
     @ManyToMany(mappedBy = "productoList")
     @JsonIgnore
     private List<Carrito> carritoList;
@@ -79,29 +83,6 @@ public class Producto implements Serializable {
         this.idProducto = idProducto;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 
     public List<Carrito> getCarritoList() {
         return carritoList;
@@ -134,6 +115,38 @@ public class Producto implements Serializable {
     @Override
     public String toString() {
         return "com.myshop.Producto[ idProducto=" + idProducto + " ]";
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
     
 }
